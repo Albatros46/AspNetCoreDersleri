@@ -1,4 +1,5 @@
 ﻿using Basics.Models;
+using Basics.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basics.Controllers
@@ -11,21 +12,59 @@ namespace Basics.Controllers
             //return View(kurs);
             var kurslar = new List<Course>()
             {
-               new Course(){Id=1, Title="Java 17 SE",Description="Java 17 SE Oracle Sertificates", ImgUrl="java17Se.jpg"},
-               new Course(){Id=2, Title="Asp.Net Core 7",Description="Full Stack Asp.Net 7 Core ",ImgUrl="ASP.webp"},
-               new Course(){Id=3, Title="Python with Django",Description="Python with Django framework web programming",ImgUrl = "pythonDajngo.webp"},
+               new Course(){
+                   Id=1, 
+                   Title="Java 17 SE",
+                   Description="Java 17 SE Oracle Sertificates", 
+                   ImgUrl="java17Se.jpg",
+                   Tags=new string[]{ "Java","Spring Boot"},
+                   isActive=false,
+                   isHome=true,
+               },
+               new Course(){
+                   Id=2, 
+                   Title="Asp.Net Core 7",
+                   Description="Full Stack Asp.Net 7 Core ",
+                   ImgUrl="ASP.webp",
+                   Tags=new string[]{"Asp .Net","asp"},
+                   isActive=true,
+                   isHome=true,
+               },
+               new Course(){
+                   Id=3, 
+                   Title="Python with Django",
+                   Description="Python with Django framework web programming",
+                   ImgUrl = "pythonDajngo.webp",
+                   Tags=new string[]{"Django","flask","Python"},
+                   isActive=true,
+                   isHome=false,
+               },
+               new Course(){
+                   Id=4, 
+                   Title="JavaScript",
+                   Description="JavaScript with code",
+                   ImgUrl = "javaScript.png",
+                   Tags=new string[]{"javascript","react","angular"},
+                   isActive=true,
+                   isHome=true,
+               },
             };
             return View(kurslar);
         }
         public IActionResult List()
         {
-            var kurslar = new List<Course>()
+          
+            return View(CourseRepository.Courses);
+        }
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
             {
-               new Course(){Id=1, Title="Java 17 SE",Description="Java 17 SE Oracle Sertificates", ImgUrl="java17Se.jpg"},
-               new Course(){Id=2, Title="Asp.Net Core 7",Description="Full Stack Asp.Net 7 Core ",ImgUrl="ASP.webp"},
-               new Course(){Id=3, Title="Python with Django",Description="Python with Django framework web programming",ImgUrl = "pythonDajngo.webp"},
-            };
-            return View(kurslar);
+                return RedirectToAction("Index","Course");
+            }
+            var kurs = CourseRepository.GetById(id);
+           
+            return View(kurs);
         }
     }
 }

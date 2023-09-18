@@ -1,12 +1,31 @@
-﻿@{
+﻿
+@model List<Basics.Models.Course>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
- *@
- @section Header{
+
+@section Header{
     @await Html.PartialAsync("_Header") <!--Section adi nerede geciyorsa o alanda _Header kullanilacak-->
  }
+
+<div class="row">
+    @foreach (var course in Model)
+    {
+        if (course.isHome && course.isActive)
+        {
+            <div class="col-3">
+                <div class="card">
+                    <img src="~/img/@course.ImgUrl" class="card-img-top" alt="">
+                </div>
+                <div class="card-title">
+                    <h5>@course.Title</h5>
+                    <p>@course.Description</p>
+                    <a asp-action="Details" asp-controller="Course" asp-route-id="@course.Id">Detay</a>
+                </div>
+            </div>
+        }
+
+    }
+</div>

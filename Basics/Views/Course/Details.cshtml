@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Course Details";
+}
+
+@model Course
+
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/img/@Model.ImgUrl" class="img-fluid rounded" alt="" />
+    </div>
+    <div class="col-md-8">
+        <div class="card-body">
+            <a asp-action="Details" asp-controller="Course" asp-route-id="@Model.Id">
+                <h5 class="card-title">@Model.Title</h5>
+            </a>
+
+            <p class="card-text">@Model.Description</p>
+            <div>
+                @if (Model.Tags != null)
+                {
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <span class="badge bg-primary">@tag</span>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

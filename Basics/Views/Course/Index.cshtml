@@ -7,5 +7,9 @@
 
 @foreach (var item in Model)
 {
-    @await Html.PartialAsync("_CourseCard", item);<!--PartialView e parametre olarak item degiskeni gonderildi-->
+    @if (item.isActive)
+    {
+        @await Html.PartialAsync("_CourseCard", item);<!--PartialView e parametre olarak item degiskeni gonderildi-->
+    }
+    
 }
