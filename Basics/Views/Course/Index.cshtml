@@ -1,0 +1,21 @@
+﻿@model List<Course>
+
+
+<br />
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="~/img/@item.ImgUrl" class="card-img-top" alt="Hollywood Sign on The Hill" />
+                <div class="card-body">
+                    <h5 class="card-title" id="kurs_@item.Id">@item.Id - @item.Title</h5>
+                    <p class="card-text">
+                        @item.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

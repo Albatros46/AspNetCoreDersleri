@@ -1,0 +1,29 @@
+﻿@model List<Course>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Desctiption</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <th scope="row" id="kurs_@item.Id">@item.Id</th>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>
+                    <input type="button" value="Delete" class="bg-danger border-0" />
+                    <input type="button" value="Update" class="bg-info border-0" />
+                </td>
+            </tr>
+
+        </tbody>
+    }
+</table>
+
